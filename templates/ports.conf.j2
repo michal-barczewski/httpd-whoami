@@ -1,0 +1,8 @@
+{% for item in httpd_whoami_ports %}
+Listen {{item}}
+<VirtualHost *:{{item}}>
+  ServerName localhost
+  DocumentRoot /var/www/ports_{{item}}
+
+</VirtualHost>
+{% endfor %}

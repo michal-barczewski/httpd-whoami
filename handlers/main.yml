@@ -1,0 +1,7 @@
+---
+# handlers file for httpd_whoami
+- name: reload httpd
+  become: true
+  service: 
+    name: httpd
+    state: reloaded

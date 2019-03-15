@@ -1,0 +1,14 @@
+---
+# tasks file for httpd_whoami
+- name: install httpd
+  package:
+    name: httpd
+    state: installed
+
+- include_tasks: httpd_conf.yml
+
+- name: start httpd
+  service:
+    name: httpd
+    state: started
+    enabled: true

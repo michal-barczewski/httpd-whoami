@@ -1,0 +1,43 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: "httpd-whoami-instance-1"
+    box: "geerlingguy/centos7"
+    interfaces:
+      - network_name: private_network
+        type: dhcp
+        auto_config: true
+
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: prepare.yml
+  lint:
+    name: ansible-lint
+
+scenario:
+  name: default
+  create_sequence:
+  # uruchamiamy dependency przed prepare żeby móc używać ról z galaxy w kroku prepare
+    - create
+    - dependency
+    - prepare
+  converge_sequence:
+    - converge
+
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

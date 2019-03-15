@@ -1,0 +1,20 @@
+- hosts:
+  - all
+  become: true
+  roles:
+  - role: geerlingguy.repo-epel
+  tasks:
+  - name: basic tools
+    package:
+      name: htop, vim, tcpdump, tree, bind-utils, telnet
+      state: installed
+  - name: common prepare tasks for all role instances
+    debug:
+      msg: "add common prepare tasks for all instances here"
+
+- hosts:
+  - "httpd-whoami-instance-1"
+  tasks:
+  - name: prepare tasks for "httpd-whoami-instance-1"
+    debug:
+      msg: "add prepare tasks for httpd-whoami-instance-1 here"
