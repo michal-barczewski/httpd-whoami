@@ -8,7 +8,7 @@ None
 
 ## Variables
 
-None
+httpd_whoami_ports - list of ports to listen on
 
 ## Dependencies
 
@@ -20,4 +20,9 @@ None
 - hosts: servers
   roles:
     - role: httpd-whoami
+      httpd_whoami_ports:
+        - 8080
+        - 8081
+        - 8082
+
 ```
